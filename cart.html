@@ -13,84 +13,27 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
 
-
-        
+        <script src="Setting.js">
+            
+            
+        </script>
         <script>
-            String.prototype.format = function() {
-            var formatted = this;
-            for (var i = 0; i < arguments.length; i++) {
-                var regexp = new RegExp('\\{'+i+'\\}', 'gi');
-                formatted = formatted.replace(regexp, arguments[i]);
-            }
-            return formatted;
-            };
-
-            function counter(names){
-                const result = names.reduce((acc, cur) => {
-                    acc[cur] = (acc[cur] || 0) + 1;
-                    return acc;
-                }, {});
-                return result;
-            }
-
-
-            var item1={name:"연필",price:1000,url:"item01.html"};
-            var item2={name:"지우개",price:500,url:"item02.html"};
-            var item3={name:"리코더",price:6000,url:"item03.html"};
-            var item4={name:"트라이앵글",price:5000,url:"item04.html"};
-            var item5={name:"스케치북",price:3000,url:"item05.html"};
-            var item6={name:"공책",price:1000,url:"item06.html"};
-            var item7={name:"돋보기",price:1500,url:"item07.html"};
-            var item8={name:"실내화",price:3000,url:"item08.html"};
-
-            var item_arr=[item1,item2,item3,item4,item5,item6,item7,item8];
-
-
-
-            if(localStorage.getItem('cartcount')){
-            var lastData = localStorage.getItem('cartcount')
-           }
-           if (localStorage.getItem("ItemCartIn")){
-                var CartinItem=JSON.parse(localStorage.getItem("ItemCartIn"));
-                }
+                if(localStorage.getItem('cartcount')){
+                    var lastData = JSON.parse(localStorage.getItem('cartcount'));
+                    }
+                if (localStorage.getItem("ItemCartIn")){
+                    var CartinItem=JSON.parse(localStorage.getItem("ItemCartIn"));
+                    }
             console.log(lastData)
             console.log(CartinItem)
         </script>
-
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit" href="cart.html">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span id="cart" class="badge bg-dark text-white ms-1 rounded-pill">
-                                <script>
-                                </script>
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+            <script src="pagetop.js"></script>
         </nav>
+        <script src="cartbtn.js"></script>
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
@@ -112,7 +55,7 @@
                             var host = document.getElementById("cart_site");
                             CartinitemwithId=counter(CartinItem);
                             Object.keys(CartinitemwithId).forEach(function(item){
-                            str='<div class="col-md-8">\
+                            str='<div class="col-md-8" id="item_{4}">\
                                 <img alt="Bootstrap Image Preview" src="assets/shopitem-0{0}.png" />\
                                 <div class="card">\
                                 <h5 id="item_name" class="card-header">\
@@ -121,16 +64,15 @@
                                 <div class="card-body">\
                                     <p id="item_content" class="card-text">{2}</p>\
                                 </div>\
-                                <div class="card-footer">\
+                                <div class="card-footer" id="item_count_{4}">\
                                     {3}\
-                                </div></div></div>'.format(parseInt(item)+1,item_arr[item].name,item_arr[item].price,CartinitemwithId[item]);
-                            str2= '<div class="col-md-4">\
-                                <div class="btn-group" role="group">\
-                                    <button class="btn btn-secondary" type="button">1 </button> \
-                                    <button class="btn btn-secondary" type="button">2 </button> \
-                                    <button class="btn btn-secondary" type="button">3 </button> \
-                                    <button class="btn btn-secondary" type="button">4 </button>\
-                                </div>'
+                                </div></div></div>'.format(parseInt(item)+1,item_arr[item].name,item_arr[item].price,CartinitemwithId[item],parseInt(item));
+                            str2= '<div class="col-md-4" id="item_button_{0}">'.format(item)+
+                                '<div class="btn-group" role="group">\
+                                    <button class="btn btn-secondary" type="button" onclick="cartitem_add({0})">수량 +</button>'.format(item)+
+                                    '<button class="btn btn-secondary" type="button" onclick="cartitem_sub({0})">수량 -</button>'.format(item)+
+                                    '<button class="btn btn-secondary" type="button" onclick="cartitem_del({0})">제거</button>'.format(item)+
+                                '</div>'
                             
                             host.innerHTML += str+str2;
                             });

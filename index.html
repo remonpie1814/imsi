@@ -15,100 +15,26 @@
 
 
         <!-- 내가 추가한 스크립트 -->
-        <script>
-            String.prototype.format = function() {
-            var formatted = this;
-            for (var i = 0; i < arguments.length; i++) {
-                var regexp = new RegExp('\\{'+i+'\\}', 'gi');
-                formatted = formatted.replace(regexp, arguments[i]);
-            }
-            return formatted;
-            };
-
-            function counter(names){
-                const result = names.reduce((acc, cur) => {
-                    acc[cur] = (acc[cur] || 0) + 1;
-                    return acc;
-                }, {});
-                return result;
-            }
+        <script src="Setting.js">
             
-            var item1={name:"연필",price:1000,url:"item01.html"};
-            var item2={name:"지우개",price:500,url:"item02.html"};
-            var item3={name:"리코더",price:6000,url:"item03.html"};
-            var item4={name:"트라이앵글",price:5000,url:"item04.html"};
-            var item5={name:"스케치북",price:3000,url:"item05.html"};
-            var item6={name:"공책",price:1000,url:"item06.html"};
-            var item7={name:"돋보기",price:1500,url:"item07.html"};
-            var item8={name:"실내화",price:3000,url:"item08.html"};
-
-            var item_arr=[item1,item2,item3,item4,item5,item6,item7,item8];
-
-
-            function addcart(item_id){
-                item_id--;
-                var carttxt = document.getElementById("cart");
-                cartcount++;
-                console.log(cartcount);
-                cart.innerHTML =cartcount;
-                localStorage.setItem("cartcount",cartcount);
-                if (localStorage.getItem("ItemCartIn")){
-                var CartinItem=JSON.parse(localStorage.getItem("ItemCartIn"));
-                }
-                else{
-                    CartinItem=[]
-                }
-                CartinItem.push(item_id)
-                localStorage.setItem("ItemCartIn",JSON.stringify(CartinItem));
-                            }
 
             // 디버그용. 로컬스토리지의 변수들 리셋.
-//             var CartinItem=[]
-//             localStorage.setItem("ItemCartIn",JSON.stringify(CartinItem));
-//             var cartcount=0;
-//             localStorage.setItem("cartcount",cartcount);
+            // var CartinItem=[]
+            // localStorage.setItem("ItemCartIn",JSON.stringify(CartinItem));
+            // var cartcount=0;
+            // localStorage.setItem("cartcount",JSON.stringify(cartcount));
 
             
         </script>
 
 
-
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="button" onclick="location.href='cart.html'">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span id="cart" class="badge bg-dark text-white ms-1 rounded-pill">
-                                <script>
-                                    var carttxt = document.getElementById("cart");
-                                    cart.innerHTML =cartcount;
-                                </script>
-                            </span>
-                        </button>
-                    </form>
-                </div>
-            </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+            <script src="pagetop.js"></script>
         </nav>
+        <script src="cartbtn.js"></script>
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
@@ -118,10 +44,8 @@
                 </div>
             </div>
         </header>
+
         <!-- Section-->
-        
-
-
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div id="site" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
